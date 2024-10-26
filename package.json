@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "nodemon node "
+    "start": "nodemon node main.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "auto-bind": "^5.0.1",
+    "auto-bind": "^3.0.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "http-errors": "^2.0.0",
     "mongoose": "^8.6.0",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
