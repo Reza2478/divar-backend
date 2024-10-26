@@ -54,7 +54,6 @@
  */
 
 
-
 /**
  * @swagger
  * /auth/check-otp:
@@ -71,6 +70,19 @@
  *         application/json:
  *           schema:
  *             $ref: "#/components/schemas/CheckOTP"
+ *     responses:
+ *       200:
+ *         description: success
+ */
+
+
+/**
+ * @swagger
+ * /auth/logout:
+ *   get:
+ *     summary: logout from account
+ *     tags:
+ *       - Auth
  *     responses:
  *       200:
  *         description: success
