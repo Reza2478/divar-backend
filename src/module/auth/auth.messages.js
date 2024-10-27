@@ -1,4 +1,4 @@
-const authMessage = {
+const authMessage = Object.freeze({
     otpSentSuccessfully: "send otp has been successfully",
     notFound: "user not found",
     OtpCodeNotExpired: "otp code not expired please try later!",
@@ -6,7 +6,7 @@ const authMessage = {
     LoginSuccessfully: "login has been successfully!",
     OtpCodeIsInvalid: "otp code does not correct!",
     LogOutSuccessfully: "logout has been successfully!",
-};
+})
 
 module.exports = {
     authMessage,

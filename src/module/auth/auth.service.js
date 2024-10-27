@@ -1,7 +1,7 @@
 const autoBind = require("auto-bind");
-const {userModel} = require("../user/user.model");
+const UserModel = require("../user/user.model");
 const createHttpError = require("http-errors");
-const {authMessage} = require("./authMessages");
+const {authMessage} = require("./auth.messages");
 
 const {randomInt} = require("crypto")
 const jwt = require("jsonwebtoken");
@@ -12,7 +12,7 @@ class AuthService {
 
     constructor() {
         autoBind(this);
-        this.#model = userModel
+        this.#model = UserModel
     }
 
     async sendOtp(mobile) {

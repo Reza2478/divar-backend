@@ -1,6 +1,6 @@
 const autoBind = require("auto-bind");
 const authService = require("./auth.service");
-const {authMessage} = require("./authMessages");
+const {authMessage} = require("./auth.messages");
 const NodeEnv = require("../../common/constant/env.enum");
 const CookieName = require("../../common/constant/cookie.enm");
 

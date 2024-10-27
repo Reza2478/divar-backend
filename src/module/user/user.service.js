@@ -1,5 +1,5 @@
 const autoBind = require("auto-bind");
-const {userModel} = require("../user/user.model");
+const UserModel= require("../user/user.model");
 const createHttpError = require("http-errors");
 
 
@@ -8,7 +8,7 @@ class UserService {
 
     constructor() {
         autoBind(this);
-        this.#model = userModel
+        this.#model = UserModel
     }
 }
 

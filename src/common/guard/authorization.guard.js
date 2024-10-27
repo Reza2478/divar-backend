@@ -2,7 +2,6 @@ const createHttpError = require("http-errors");
 const authorizationMessage = require("../messages/auth.message")
 const jwt = require("jsonwebtoken");
 const {userModel} = require("../../module/user/user.model");
-const {authMessage} = require("../../module/auth/authMessages");
 
 require("dotenv").config();
 
