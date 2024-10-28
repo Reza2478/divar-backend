@@ -87,3 +87,32 @@
  *         description: get all options of category successfully
  */
 
+/**
+ * @swagger
+ * /option/{id}:
+ *   get:
+ *     summary: get option by id
+ *     tags:
+ *       - Option
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: get all options of category successfully
+ */
+
+/**
+ * @swagger
+ * /option:
+ *   get:
+ *     summary: get option by id
+ *     tags:
+ *       - Option
+ *
+ *     responses:
+ *       200:
+ *         description: get all options of category successfully
+ */
+
