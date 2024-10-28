@@ -30,18 +30,16 @@ class CategoryService {
         if (categoryDto?.slug) {
             categoryDto.slug = slugify(categoryDto.slug);
             await this.alreadyExistBySlug(categoryDto.slug)
-        }else{
+        } else {
             categoryDto.slug = slugify(categoryDto.name);
         }
-
-
-        console.log("categoryDto ======>" ,categoryDto)
 
         const category = await this.#model.create(categoryDto);
         return category
     }
 
     async find() {
+        return await this.#model.find({parent: {$exists: false}})
     }
 
     async checkExistById(id) {
