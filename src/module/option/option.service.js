@@ -1,22 +1,22 @@
 const autoBind = require("auto-bind");
 const OptionModel = require("./option.model");
-const CategoryModel = require("./../category/category.model");
+const CategoryService = require("../category/category.service")
 const createHttpError = require("http-errors");
 const OptionMessage = require("./option.message")
 const slugify = require("slugify");
 
 class OptionService {
     #model;
-    #categoryModel
+    #categoryService
 
     constructor() {
         autoBind(this)
         this.#model = OptionModel;
-        this.#categoryModel = CategoryModel;
+        this.#categoryService = CategoryService;
     }
 
     async create(optionDto) {
-        const category = await this.checkExistCategoryById(optionDto.category)
+        const category = await this.#categoryService.checkExistById(optionDto.category)
         optionDto.category = category._id;
         optionDto.key = slugify(optionDto.key, {trim: true, lower: true, replacement: "_"});
         await this.alreadyExistByCategoryAndKey(category._id, optionDto.key)
@@ -89,12 +89,6 @@ class OptionService {
         ])
 
         return options
-    }
-
-    async checkExistCategoryById(categoryId) {
-        const category = await this.#categoryModel.findById(categoryId)
-        if (!category) throw new createHttpError(404, OptionMessage.notFoundCategory)
-        return category
     }
 
     async checkExistById(id) {
