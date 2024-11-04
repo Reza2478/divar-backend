@@ -1,8 +1,8 @@
-import mongoose, {model, Types} from "mongoose";
+const {Schema, Types, model} = require('mongoose');
 
 
-const OptionSchema = new mongoose.Schema({
-    category: {type: Types.ObjectId, required: true},
+const OptionSchema = new Schema({
+    category: {type: Types.ObjectId, required: true, ref:'Category'},
     title: {type: String, required: true},
     key: {type: String, required: true},
     type: {type: String, enum: ["number", "string", "array", "boolean"]},

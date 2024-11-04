@@ -73,7 +73,7 @@
 
 /**
  * @swagger
- * /option/{categoryId}:
+ * /option/by-category/{categoryId}:
  *   get:
  *     summary: get all options of category
  *     tags:
@@ -81,6 +81,22 @@
  *     parameters:
  *       - in: path
  *         name: categoryId
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: get all options of category successfully
+ */
+
+/**
+ * @swagger
+ * /option/by-category-slug/{slug}:
+ *   get:
+ *     summary: get all options of category
+ *     tags:
+ *       - Option
+ *     parameters:
+ *       - in: path
+ *         name: slug
  *         type: string
  *     responses:
  *       200:
@@ -105,9 +121,25 @@
 
 /**
  * @swagger
+ * /option/{id}:
+ *   delete:
+ *     summary: delete option by id
+ *     tags:
+ *       - Option
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: remove option has been successfully
+ */
+
+/**
+ * @swagger
  * /option:
  *   get:
- *     summary: get option by id
+ *     summary: get all options
  *     tags:
  *       - Option
  *
