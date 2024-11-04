@@ -10,6 +10,7 @@ router.get("/:id", OptionController.findById)
 router.get("/by-category/:categoryId", OptionController.findByCategoryId)
 router.get("/by-category-slug/:slug", OptionController.findByCategorySlug)
 router.delete("/:id", OptionController.removeById)
+router.put("/:id", OptionController.update)
 
 module.exports = {
     OptionRouter: router,

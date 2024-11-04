@@ -39,6 +39,30 @@
  *             type: string
  *         category:
  *           type: string
+ *     UpdateOption:
+ *       type: object
+ *       properties:
+ *         title:
+ *           type: string
+ *         key:
+ *           type: string
+ *         guid:
+ *           type: string
+ *         required:
+ *           type: boolean
+ *         type:
+ *           type: string
+ *           enum:
+ *             - number
+ *             - string
+ *             - array
+ *             - boolean
+ *         enum:
+ *           type: array
+ *           items:
+ *             type: string
+ *         category:
+ *           type: string
  */
 
 /**
@@ -71,6 +95,42 @@
  *                   example: "Option created successfully"
  *                 option:
  *                   $ref: '#/components/schemas/CreateOption'
+ */
+
+/**
+ * @swagger
+ * /option/{id}:
+ *   put:
+ *     summary: update an option
+ *     description: Endpoint to update an option in the Option module
+ *     tags:
+ *       - Option
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateOption'
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/UpdateOption'
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Option updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Option updated successfully"
+ *                 option:
+ *                   $ref: '#/components/schemas/UpdateOption'
  */
 
 /**

@@ -13,10 +13,23 @@ class OptionController {
 
     async create(req, res, next) {
         try {
-            const {title, category, key, type, enum: list, guid} = req.body;
-            await this.#service.create({title, category, key, type, enum: list, guid});
+            const {title, category, key, type, enum: list, guid, required} = req.body;
+            await this.#service.create({title, category, key, type, enum: list, guid, required});
             return res.status(201).json({
                 message: OptionMessage.create
+            })
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    async update(req, res, next) {
+        try {
+            const {title, category, key, type, enum: list, guid, required} = req.body;
+            const {id} = req.params
+            await this.#service.update(id,{title, category, key, type, enum: list, guid, required});
+            return res.json({
+                message: OptionMessage.update
             })
         } catch (error) {
             next(error)

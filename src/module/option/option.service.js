@@ -4,6 +4,8 @@ const CategoryService = require("../category/category.service")
 const createHttpError = require("http-errors");
 const OptionMessage = require("./option.message")
 const slugify = require("slugify");
+const {IsTrue, IsFalse} = require("../../common/utils/functions");
+const {isValidObjectId} = require("mongoose");
 
 class OptionService {
     #model;
@@ -21,12 +23,45 @@ class OptionService {
         optionDto.key = slugify(optionDto.key, {trim: true, lower: true, replacement: "_"});
         await this.alreadyExistByCategoryAndKey(category._id, optionDto.key)
 
+        if (IsTrue(optionDto?.required)) optionDto.required = true;
+        if (IsFalse(optionDto?.required)) optionDto.required = false;
+
         // for handle enum when use swagger for urlEncoded type
         if (optionDto?.enum && typeof optionDto.enum === "string") {
             optionDto.enum = optionDto.enum.split(",")
         } else if (!Array.isArray(optionDto.enum)) optionDto.enum = []
         const option = await this.#model.create(optionDto)
         return option
+    }
+
+    async update(id, optionDto) {
+        const existOption = await this.checkExistById(id)
+        if (optionDto && isValidObjectId(optionDto.category)) {
+            const category = await this.#categoryService.checkExistById(optionDto.category)
+            optionDto.category = category._id;
+
+        } else {
+            delete optionDto.category
+        }
+
+        if (optionDto.key) {
+            optionDto.key = slugify(optionDto.key, {trim: true, lower: true, replacement: "_"});
+            let categoryId= existOption.category
+            if(optionDto.category) categoryId = optionDto.category
+            await this.alreadyExistByCategoryAndKey(categoryId, optionDto.key)
+        }
+
+        if (IsTrue(optionDto?.required)) optionDto.required = true;
+        else if (IsFalse(optionDto?.required)) optionDto.required = false;
+        else delete optionDto.required
+
+        // for handle enum when use swagger for urlEncoded type
+        if (optionDto?.enum && typeof optionDto.enum === "string") {
+            optionDto.enum = optionDto.enum.split(",")
+        } else if (!Array.isArray(optionDto.enum)) delete optionDto.enum
+
+        console.log("optionDto===>", optionDto)
+        return await this.#model.updateOne({_id: id}, {$set: optionDto})
     }
 
     async find() {
