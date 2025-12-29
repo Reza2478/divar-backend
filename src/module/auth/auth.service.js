@@ -19,14 +19,13 @@ class AuthService {
         const user = await this.#model.findOne({mobile});
         const now = new Date().getTime()
         const otp = {
-            otpCode: randomInt(10000, 99999),
-            expiresIn: now + (1000 * 60 * 2)
+            code: randomInt(100000, 999999),
+            expiresIn: now + (1000 * 60 * 2),
         }
+
         if (!user) {
-            return await this.#model.create({
-                mobile,
-                otp,
-            });
+            const newUser = await this.#model.create({mobile, otp, verifiedMobile: false})
+            return newUser
         }
 
         if (user.otp && user.otp.expiresIn > now) {
@@ -34,6 +33,7 @@ class AuthService {
         }
 
         user.otp = otp
+
         await user.save();
     }
 

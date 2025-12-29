@@ -1,8 +1,8 @@
 const {Schema, model} = require("mongoose");
 
 const OTPSchema = new Schema({
-    otpCode: {type: "string", default: undefined},
-    expiresIn: {type: "number", default: 0},
+    otpCode: {type: String, default: undefined, required: false},
+    expiresIn: {type: Number, default: 0, required: false},
 });
 
 const UserSchema = new Schema(
